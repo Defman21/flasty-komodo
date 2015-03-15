@@ -1,0 +1,378 @@
+# Created with ksfedit.or (c) 2015
+# http://devbevariour.cf/ksfe/
+# KsfEdit.or by Defman21
+# Version: 1.0.0-rc1
+# https://github.com/DevBevariour/ksfedit.or
+def _(val, default):
+    if val.strip() == "":
+        return default
+    if type(val) == int:
+        return val
+
+    val = val.lstrip('#')
+    if len(val) == 3:
+        val += val
+
+    r,g,b = int(val[:2], 16), int(val[2:4], 16), int(val[4:], 16)
+    color = r+g*256+b*256*256
+    return color
+
+def parseColors():
+  colors = {}
+  colors['foreground'] = _("#d4d7d6", "")
+  colors['background'] = _("#151718", "")
+  colors['comment'] = _("#4a5f68", colors['foreground'])
+  colors['string'] = _("#55b5db", colors['foreground'])
+  colors['number'] = _("#cd3f45", colors['foreground'])
+  colors['regex'] = colors['number']
+  colors['constant'] = _("#cd3f45", colors['foreground'])
+  colors['variable'] = _("#e6cd69", colors['foreground'])
+  colors['keyword'] = _("#e6cd69", colors['foreground'])
+  colors['identifiers'] = _('#d4d7d6', colors['foreground'])
+  colors['function'] = _('#55b5db', colors['foreground'])
+  colors['control_characters'] = _("#000000", colors['foreground'])
+  colors['attr_name'] = _("#9fca56", colors['foreground'])
+  colors['attr_value'] = _("", colors['foreground'])
+  colors['tag'] = _("#55b5db", colors['foreground'])
+  colors['classes'] = _("#ff4377", colors['foreground'])
+  colors['l_back'] = colors['background']
+  colors['l_fore'] = colors['comment']
+  colors['current_line'] = _("#101112", colors['foreground'])
+  colors['operators'] = colors['foreground']
+  colors['error'] = _("#e6002b", colors['foreground'])
+  colors['diff_add'] = _("#9fca56", colors['foreground'])
+  colors['diff_delete'] = _("#cd3f45", colors['foreground'])
+  colors['diff_change'] = _("#967efb", colors['foreground'])
+  colors['selection'] = _("#4fa5c7", colors['foreground'])
+  colors['findHighlight'] = _("#4fa5c7", colors['foreground'])
+  #Background
+  colors['comment_bg'] =  _("#151718", colors['background'])
+  colors['string_bg'] =  _("#151718", colors['background'])
+  colors['number_bg'] =  _("#151718", colors['background'])
+  colors['regex_bg'] =  _("#151718", colors['background'])
+  colors['constant_bg'] =  _("#151718", colors['background'])
+  colors['variable_bg'] =  _("#151718", colors['background'])
+  colors['keyword_bg'] =  _("#151718", colors['background'])
+  colors['identifiers_bg'] =  _("#151718", colors['background'])
+  colors['function_bg'] =  _("#151718", colors['background'])
+  colors['control_characters_bg'] =  _("#151718", colors['background'])
+  colors['attr_name_bg'] =  _("#151718", colors['background'])
+  colors['attr_value_bg'] =  _("", colors['background'])
+  colors['tag_bg'] =  _("#151718", colors['background'])
+  colors['classes_bg'] =  _("#151718", colors['background'])
+  colors['operators_bg'] =  colors['background']
+  colors['diff_add_bg'] =  _("#151718", colors['background'])
+  colors['diff_delete_bg'] =  _("#151718", colors['background'])
+  colors['diff_change_bg'] =  _("#151718", colors['background'])
+  colors['error_bg'] = _("#38000b", colors['background'])
+  return colors
+
+def parseScheme(colors):
+    return {
+
+        'Version': 13,
+
+        'Booleans': {
+            'caretLineVisible': True,
+            'preferFixed': True,
+            'useSelFore': False
+        },
+
+        'CommonStyles': {
+            'attribute name': {
+                'fore': colors['attr_name'], 'back': colors['attr_name_bg']
+            },
+            'attribute value': {
+                'fore': colors['attr_value'], 'back': colors['attr_value_bg']
+            },
+            'bracebad': {
+                'fore': colors['foreground']
+            },
+            'bracehighlight': {
+                'fore': colors['foreground'],
+                'back': colors['background']
+            },
+            'classes': {
+                'fore': colors['classes'], 'back': colors['classes_bg']
+            },
+            'comments': {
+                'fore': colors['comment'], 'back': colors['comment_bg'],
+                'italic': True
+            },
+            'control characters': {
+                'fore': colors['control_characters'], 'back': colors['control_characters_bg']
+            },
+            'default_fixed': {
+                'back': colors['background'],
+                'eolfilled': 0,
+                'face': 'Monaco, "Source Code Pro", Consolas, Inconsolata, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", Menlo, Monaco, "Courier New", Courier, Monospace',
+                'fore': colors['foreground'],
+                'hotspot': 0,
+                'italic': 0,
+# #if PLATFORM == "darwin"
+                'size': 13,
+# #else
+                'size': 11,
+# #endif
+                
+                'useFixed': 1,
+                'bold': 0,
+                'lineSpacing': 2
+            },
+            'default_proportional': {
+                'back': colors['background'],
+                'eolfilled': 0,
+                'face': '"DejaVu Sans", "Bitstream Vera Sans", Helvetica, Tahoma, Verdana, sans-serif',
+                'fore': colors['foreground'],
+                'hotspot': 0,
+                'italic': 0,
+# #if PLATFORM == "darwin"
+                'size': 13,
+# #else
+                'size': 11,
+# #endif
+                'useFixed': 0,
+                'bold': 0,
+                'lineSpacing': 2
+            },
+            'fold markers': {
+                'fore': colors['comment'], 'back': colors['comment_bg']
+            },
+            'functions': {
+                'fore': colors['function'], 'back': colors['function_bg']
+            },
+            'identifiers': {
+                'fore': colors['identifiers'], 'back': colors['identifiers_bg']
+            },
+            'indent guides': {
+                'fore': colors['background']
+            },
+            'keywords': {
+                'fore': colors['keyword'], 'back': colors['keyword_bg']
+            },
+            'keywords2': {
+                'fore': colors['keyword'], 'back': colors['keyword_bg']
+            },
+            'linenumbers': {
+                'back': colors['l_back'],
+                'fore': colors['l_fore'],
+                'size': 10,
+                'useFixed': True,
+                'bold': False
+            },
+            'numbers': {
+                'fore': colors['number'], 'back': colors['number_bg']
+            },
+            'operators': {
+                'fore': colors['operators'], 'back': colors['operators_bg']
+            },
+            'preprocessor': {
+                'fore': colors['foreground']
+            },
+            'regex': {
+                'fore': colors['regex'], 'back': colors['regex_bg']
+            },
+            'stderr': {
+                'fore': colors['error'], 'back': colors['error_bg']
+            },
+            'stdin': {
+                'fore': colors['foreground'] 
+            },
+            'stdout': {
+                'fore': colors['foreground'] 
+            },
+            'stringeol': {
+                'back': colors['foreground'],
+                'eolfilled': True
+            },
+            'strings': {
+                'fore': colors['string'], 'back': colors['string_bg']
+            },
+            'tags': {
+                'fore': colors['tag'], 'back': colors['tag_bg'] 
+            },
+            'variables': {
+                'fore': colors['variable'], 'back': colors['variable_bg']
+            }
+        },
+
+        'LanguageStyles': {
+            'CSS': {
+                'ids': {
+                    'fore': colors['keyword'], 'back': colors['keyword_bg']
+                },
+                'values': {
+                    'fore': colors['number'], 'back': colors['number_bg']
+                }
+            },
+            'Diff': {
+                'additionline': {
+                    'fore': colors['diff_add'],
+                    'back': colors['diff_add_bg']
+                },
+                'chunkheader': {
+                    'fore': colors['foreground']
+                },
+                'deletionline': {
+                    'fore': colors['diff_delete'],
+                    'back': colors['diff_delete_bg']
+                },
+                'diffline': {
+                    'fore': colors['diff_change'],
+                    'back': colors['diff_change_bg']
+                },
+                'fileline': {
+                    'fore': colors['foreground']
+                }
+            },
+            'Errors': {
+                'Error lines': {
+                    'fore': colors['error'], 'back': colors['error_bg'],
+                    'hotspot': 1,
+                    'italic': 1
+                }
+            },
+            'HTML': {
+                'attributes': {
+                    'fore': colors['attr_name'], 'back': colors['attr_name_bg']
+                },
+                'cdata': {
+                    'fore': colors['comment'], 'back': colors['comment_bg']
+                },
+                'cdata content': {
+                    'fore': colors['foreground']
+                },
+                'cdata tags': {
+                    'fore': colors['foreground']
+                },
+                'xpath attributes': {
+                    'fore': colors['attr_value'], 'back': colors['attr_value_bg']
+                }
+            },
+            'HTML5': {
+                'attributes': {
+                    'fore': colors['attr_name'], 'back': colors['attr_name_bg']
+                },
+                'cdata': {
+                    'fore': colors['comment'], 'back': colors['comment_bg']
+                },
+                'cdata content': {
+                    'fore': colors['foreground']
+                },
+                'cdata tags': {
+                    'fore': colors['foreground']
+                },
+                'xpath attributes': {
+                    'fore': colors['attr_value'], 'back': colors['attr_value_bg']
+                }
+            },
+            'XML': {
+                'attributes': {
+                    'fore': colors['attr_name'], 'back': colors['attr_name_bg']
+                },
+                'cdata': {
+                    'fore': colors['comment'], 'back': colors['comment_bg']
+                },
+                'cdata content': {
+                    'fore': colors['foreground']
+                },
+                'cdata tags': {
+                    'fore': colors['foreground']
+                },
+                'xpath attributes': {
+                    'fore': colors['attr_value'], 'back': colors['attr_value_bg']
+                }
+            },
+            'JavaScript': {
+                'commentdockeyword': {
+                    'fore': colors['comment'], 'back': colors['comment_bg']
+                },
+                'commentdockeyworderror': {
+                    'fore': colors['error'], 'back': colors['error_bg']
+                },
+                'globalclass': {
+                    'fore': colors['classes'], 'back': colors['classes_bg']
+                }
+            },
+            'PHP': {
+                'commentdockeyword': {
+                    'fore': colors['comment'], 'back': colors['comment_bg']
+                },
+                'commentdockeyworderror': {
+                    'fore': colors['error'], 'back': colors['error_bg']
+                }
+            }
+        },
+
+        'MiscLanguageSettings': {},
+
+        'Colors': {
+            'bookmarkColor': colors['background'],
+            'callingLineColor': colors['background'],
+            'caretFore': colors['comment'],
+            'caretLineBack': colors['background'],
+            'changeMarginDeleted': colors['diff_delete'],
+            'changeMarginInserted': colors['diff_add'],
+            'changeMarginReplaced': colors['diff_change'],
+            'currentLineColor': colors['current_line'],
+            'edgeColor': colors['background'],
+            'foldMarginColor': colors['background'],
+            'selBack': colors['selection'],
+            'selFore': colors['foreground'],
+            'whitespaceColor': colors['foreground']
+        },
+
+        'Indicators': {
+            'find_highlighting': {
+                'alpha': 100,
+                'color': colors['findHighlight'],
+                'draw_underneath': True,
+                'style': 7
+            },
+            'linter_error': {
+                'alpha': 255,
+                'color': colors['error_bg'],
+                'draw_underneath': True,
+                'style': 12
+            },
+            'linter_warning': {
+                'alpha': 255,
+                'color': colors['error_bg'],
+                'draw_underneath': True,
+                'style': 12
+            },
+            'multiple_caret_area': {
+                'alpha': 255,
+                'color': colors['regex'],
+                'draw_underneath': False,
+                'style': 6
+            },
+            'soft_characters': {
+                'alpha': 255,
+                'color': colors['foreground'],
+                'draw_underneath': False,
+                'style': 0
+            },
+            'tabstop_current': {
+                'alpha': 255,
+                'color': colors['background'],
+                'draw_underneath': True,
+                'style': 7
+            },
+            'tabstop_pending': {
+                'alpha': 255,
+                'color': colors['background'],
+                'draw_underneath': True,
+                'style': 6
+            },
+            'tag_matching': {
+                'alpha': 255,
+                'color': colors['regex'],
+                'draw_underneath': False,
+                'style': 0
+            }
+        }
+
+    }
+colors = parseColors()
+exports = parseScheme(colors)
