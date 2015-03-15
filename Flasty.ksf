@@ -310,7 +310,7 @@ def parseScheme(colors):
             'bookmarkColor': colors['background'],
             'callingLineColor': colors['background'],
             'caretFore': colors['comment'],
-            'caretLineBack': colors['background'],
+            'caretLineBack': colors['current_line'],
             'changeMarginDeleted': colors['diff_delete'],
             'changeMarginInserted': colors['diff_add'],
             'changeMarginReplaced': colors['diff_change'],
