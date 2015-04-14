@@ -7,5 +7,3 @@ Flasty color scheme for Komodo 9.
 
 ##Screenshot
 ![Screen](screenshot.png)
-
-More syntax: http://devbevariour.cf/scheme/flasty
